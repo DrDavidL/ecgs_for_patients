@@ -53,37 +53,7 @@ def gen_response(prefix, history, model):
     # st.write(f'Here is the input summary: {summary}')
     return response
 
-def fetch_api_key():
-    api_key = None
-    
-    try:
-        # Attempt to retrieve the API key as a secret
-        api_key = st.secrets["OPENAI_API_KEY"]
-        # os.environ["OPENAI_API_KEY"] = api_key
-        st.session_state.openai_api_key = api_key
-        os.environ['OPENAI_API_KEY'] = api_key
-        # st.write(f'Here is what we think the key is step 1: {api_key}')
-    except:
-        
-        if st.session_state.openai_api_key != '':
-            api_key = st.session_state.openai_api_key
-            os.environ['OPENAI_API_KEY'] = api_key
-            # If the API key is already set, don't prompt for it again
-            # st.write(f'Here is what we think the key is step 2: {api_key}')
-            return 
-        else:        
-            # If the secret is not found, prompt the user for their API key
-            st.warning("Oh, dear friend of mine! It seems your API key has gone astray, hiding in the shadows. Pray, reveal it to me!")
-            api_key = st.text_input("Please, whisper your API key into my ears: ", key = 'warning2')
-  
-            st.session_state.openai_api_key = api_key
-            os.environ['OPENAI_API_KEY'] = api_key
-            # Save the API key as a secret
-            # st.secrets["my_api_key"] = api_key
-            # st.write(f'Here is what we think the key is step 3: {api_key}')
-            return 
-    
-    return 
+
 
 st.set_page_config(page_title='Patient Reporting Assistant', layout = 'centered', page_icon = ':stethoscope:', initial_sidebar_state = 'auto')
 
@@ -92,9 +62,9 @@ st.write("ALPHA version 0.2")
 disclaimer = """**Disclaimer:** This is a tool for generation of patient friendly reports from cardiology results. \n 
 Review all content carefully before using with patients. \n    
     """
-    
+openai.api_key = st.secrets["OPENAI_API_KEY"]   
 if check_password():    
-    openai.api_key = st.session_state.openai_api_key
+
     with st.expander('About Patient Reporting Assistant - Important Disclaimer'):
         st.write("Author: David Liebovitz, MD, Northwestern University")
         st.info(disclaimer)
@@ -135,9 +105,7 @@ if check_password():
             with col2:
                 st.write(response.choices[0].message.content)
         except:
-            st.write(f' here is {openai.api_key}')
-            st.write(f' here is the secret {st.secrets["OPENAI_API_KEY"]}')
-            st.write(f' here is the session key {st.session_state.openai_api_key}')
-            st.write("OpenAI API key not found. Please enter your key in the sidebar.")
+
+            st.write("OpenAI API key not found.")
             st.stop()
     
