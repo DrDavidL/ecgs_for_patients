@@ -79,6 +79,7 @@ if check_password():
         model = "gpt-3.5-turbo-16k"
  
     health_literacy_level = st.radio("Output optimized for:", ("Low Health Literacy", "High Health Literacy"))
+    st.warning("Do not enter any PHI. No dates, names, or other identifying information.")
     system_prompt = """You are a cardiology expert who sees very complex patients. There are often many 
     abnormal findings in reports for your patients. You always provide accurate information and strive to reassure patients when immediate next steps are not needed.
     You know that many tests, e.g., ECGs, often contain false positive findings and that many findings are not clinically significant.
@@ -86,7 +87,7 @@ if check_password():
     """
     col1, col2 = st.columns(2)
     with col1:
-        submitted_result = st.text_area("Paste your result content here. No PHI - so no dates or other identifiers!", height=600)
+        submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
     
     user_prompt = f'Generate a reassuring summary for a patient with {health_literacy_level} for this {submitted_result}'
     if st.button("Generate Patient Summary"):
