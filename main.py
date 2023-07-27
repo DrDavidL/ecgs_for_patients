@@ -86,7 +86,7 @@ if check_password():
     """
     col1, col2 = st.columns(2)
     with col1:
-        submitted_result = st.text_area("Paste your result content here", height=600)
+        submitted_result = st.text_area("Paste your result content here. No PHI - so no dates or other identifiers!", height=600)
     
     user_prompt = f'Generate a reassuring summary for a patient with {health_literacy_level} for this {submitted_result}'
     if st.button("Generate Patient Summary"):
