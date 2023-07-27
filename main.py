@@ -80,7 +80,7 @@ if check_password():
  
     health_literacy_level = st.radio("Output optimized for:", ("Low Health Literacy", "High Health Literacy"))
     st.warning("Do not enter any PHI. No dates, names, or other identifying information.")
-    system_prompt = """You are a cardiology expert who sees very complex patients. There are often many 
+    system_prompt = """You are an expert physician who sees very complex patients. There are often many 
     abnormal findings in reports for your patients. You always provide accurate information and strive to reassure patients when immediate next steps are not needed.
     You know that many tests, e.g., ECGs, often contain false positive findings and that many findings are not clinically significant.
     You will receive a test result as input and will generate a patient friendly summary in keeping with the health literacy level requested.    
