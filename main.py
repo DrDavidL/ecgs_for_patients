@@ -116,7 +116,7 @@ if check_password():
             presence_penalty=0
             )
             with col2:
-                st.code(response.choices[0].message.content)
+                st.write(response.choices[0].message.content)
         except:
 
             st.write("API busy. Try again - better error handling coming. :) ")
