@@ -116,9 +116,9 @@ if check_password():
             presence_penalty=0
             )
             with col2:
-                st.write(response.choices[0].message.content)
+                st.code(response.choices[0].message.content)
         except:
 
-            st.write("OpenAI API key not found.")
+            st.write("API busy. Try again - better error handling coming. :) ")
             st.stop()
     
