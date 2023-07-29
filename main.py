@@ -109,26 +109,27 @@ Imaging features are nonspecific and can occur with a variety of infectious and 
         
     
     user_prompt = f'Generate a reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}'
-    if st.button("Generate Patient Summary"):
-        try:
-            response= openai.ChatCompletion.create(
-            model= model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature = 0, 
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0
-            )
-            with col2:
-                our_summary = response.choices[0].message.content
-                st.write(response.choices[0].message.content)
-                pyperclip.copy(our_summary)
-                st.success("Summary copied to clipboard.")
-        except:
+    with col1:
+        if st.button("Generate Patient Summary"):
+            try:
+                response= openai.ChatCompletion.create(
+                model= model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                temperature = 0, 
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0
+                )
+                with col2:
+                    our_summary = response.choices[0].message.content
+                    st.write(response.choices[0].message.content)
+                    pyperclip.copy(our_summary)
+                    st.success("Summary copied to clipboard.")
+            except:
 
-            st.write("API busy. Try again - better error handling coming. :) ")
-            st.stop()
+                st.write("API busy. Try again - better error handling coming. :) ")
+                st.stop()
     
