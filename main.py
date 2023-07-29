@@ -60,8 +60,8 @@ st.set_page_config(page_title='Patient Reporting Assistant', layout = 'centered'
 
 st.title("Patient Reporting Assistant")
 st.write("ALPHA version 0.2")
-disclaimer = """**Disclaimer:** This is a tool for generation of patient friendly reports from test results. \n 
-Review all content carefully before using with patients. \n    
+disclaimer = """**Disclaimer:** This is a tool for educational use only! \n 
+Never submit any personally identifiable content. \n    
     """
 openai.api_key = st.secrets["OPENAI_API_KEY"]   
 if check_password():    
