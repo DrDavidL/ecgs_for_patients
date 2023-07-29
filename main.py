@@ -101,10 +101,11 @@ if check_password():
     """
     col1, col2 = st.columns(2)
     report = """Impression:
+    
 Multifocal, randomly distributed, nonrounded ground-glass opacities; nonspecific and likely infectious or inflammatory.
 Imaging features are nonspecific and can occur with a variety of infectious and noninfectious processes, including COVID-19 infection."""
     with col1:
-        st.info(f'Here is an example from a publicly posted report: \n\n {report}')
+        st.info(f'Here is an example from a publicly posted report:  \n\n {report}')
         submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
         
     
