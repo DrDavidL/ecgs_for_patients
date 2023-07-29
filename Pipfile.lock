@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9239233c660f12be854fe61c000988ac4de6cc2807fc37ebfd6651fb3bbd0980"
+            "sha256": "aef9b913d4cd3d9c0d7ed2f15b9a152f6093c5f7e76b9694cbab6178d25559f9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -761,6 +761,13 @@
             "markers": "python_version >= '3.6'",
             "version": "==1.0.1"
         },
+        "pyperclip": {
+            "hashes": [
+                "sha256:105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"
+            ],
+            "index": "pypi",
+            "version": "==1.8.2"
+        },
         "python-dateutil": {
             "hashes": [
                 "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
@@ -802,11 +809,11 @@
         },
         "rich": {
             "hashes": [
-                "sha256:8f87bc7ee54675732fa66a05ebfe489e27264caeeff3728c945d25971b6485ec",
-                "sha256:d653d6bccede5844304c605d5aac802c7cf9621efd700b46c7ec2b51ea914898"
+                "sha256:62c81e88dc078d2372858660e3d5566746870133e51321f852ccc20af5c7e7b2",
+                "sha256:996670a7618ccce27c55ba6fc0142e6e343773e11d34c96566a17b71b0e6f179"
             ],
             "markers": "python_full_version >= '3.7.0'",
-            "version": "==13.4.2"
+            "version": "==13.5.0"
         },
         "rpds-py": {
             "hashes": [

@@ -2,6 +2,7 @@ import streamlit as st
 import openai
 from time import sleep
 import os
+import pyperclip
 
 if "openai_api_key" not in st.session_state:
     st.session_state.openai_api_key = ''
@@ -82,8 +83,9 @@ if check_password():
     st.warning("Do not enter any PHI. No dates, names, or other identifying information.")
     system_prompt = """You are an expert physician who sees very complex patients. There are often many 
     abnormal findings in reports for your patients. You always provide accurate information and strive to reassure patients when immediate next steps are not needed.
-    You know that many tests, e.g., ECGs, often contain false positive findings and that many findings are not clinically significant.
-    You will receive a test result as input and will generate a patient friendly summary in keeping with the health literacy level requested. 
+    You know that many tests, e.g., ECGs, often contain false positive findings and that many findings are not clinically significant. 
+    If there is any ambiguity in the findings, you offer to discuss in more detail at the patient's next visit.
+    You receive a test result as input and generate the patient friendly summary (explaining any jargon) in keeping with the health literacy level requested. 
     
     Format your response as if you are speaking to a patient:
     
@@ -101,7 +103,7 @@ if check_password():
     with col1:
         submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
     
-    user_prompt = f'Generate a reassuring summary for a patient with {health_literacy_level} for this {submitted_result}'
+    user_prompt = f'Generate a reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}'
     if st.button("Generate Patient Summary"):
         try:
             response= openai.ChatCompletion.create(
@@ -116,7 +118,10 @@ if check_password():
             presence_penalty=0
             )
             with col2:
+                our_summary = response.choices[0].message.content
                 st.write(response.choices[0].message.content)
+                pyperclip.copy(our_summary)
+                st.success("Summary copied to clipboard.")
         except:
 
             st.write("API busy. Try again - better error handling coming. :) ")
