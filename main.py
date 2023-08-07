@@ -72,7 +72,7 @@ if check_password():
         st.write("Author: David Liebovitz, MD, Northwestern University")
         st.info(disclaimer)
         st.write("Last updated 7/27/23")
-        
+    st.warning("Do not enter any PHI. No dates, names, or other identifying information.")    
     selected_model = st.selectbox("Pick your GPT model:", ("GPT-3.5 ($)", "GPT-3.5 16k ($$)", "GPT-4 ($$$$)"))
     if selected_model == "GPT-3.5 ($)":
         model = "gpt-3.5-turbo"
@@ -80,9 +80,10 @@ if check_password():
         model = "gpt-4"
     elif selected_model == "GPT-3.5 16k ($$)":
         model = "gpt-3.5-turbo-16k"
- 
-    health_literacy_level = st.radio("Output optimized for:", ("Low Health Literacy", "High Health Literacy"))
-    st.warning("Do not enter any PHI. No dates, names, or other identifying information.")
+    col1, col2 = st.columns(2)
+    with col2:
+        health_literacy_level = st.radio("Output optimized for:", ("Low Health Literacy", "High Health Literacy"))
+    
     system_prompt = """You are an expert physician who sees very complex patients. There are often many 
     abnormal findings in reports for your patients. You always provide accurate information and strive to reassure patients when immediate next steps are not needed.
     You know that many tests, e.g., ECGs, often contain false positive findings and that many findings are not clinically significant. 
@@ -101,17 +102,17 @@ if check_password():
     ***  
     
     """
-    col1, col2 = st.columns(2)
+
     report = """Impression:
     
 Multifocal, randomly distributed, nonrounded ground-glass opacities; nonspecific and likely infectious or inflammatory.
 Imaging features are nonspecific and can occur with a variety of infectious and noninfectious processes, including COVID-19 infection."""
-
-    task = st.radio("What do you want to do?", ("Generate discharge instructions", "Annotate a patient result"))
+    with col1:
+        task = st.radio("What do you want to do?", ("Generate discharge instructions", "Annotate a patient result"))
 
     if task == "Generate discharge instructions":
         
-        surg_procedure = st.text_input("If this is a surgical procedure, enter the procedure performed and any special concerns here.")
+        surg_procedure = st.text_area("Please enter the procedure performed and any special concerns.")
         dc_instructions_context = f'Generate discharge instructions for a patient as if it is authored by a physician for her patient with {health_literacy_level} with this {surg_procedure}'
         if st.button("Generate Patient Summary"):
             try:
