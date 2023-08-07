@@ -138,11 +138,13 @@ Imaging features are nonspecific and can occur with a variety of infectious and 
                 st.stop()
 
     if task == "Annotate a patient result":
+        with st.sidebar:
+            st.write(f'Here is an example from a publicly posted report you can copy and paste to try:  \n\n {report}') 
 
         with col1:
-            st.info(f'Here is an example from a publicly posted report:  \n\n {report}')
+            
             submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
-            surg_procedure = st.text_input("If this is a surgical procedure, enter the procedure name here.")
+           
         
         user_prompt = f'Generate a reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}'
 
