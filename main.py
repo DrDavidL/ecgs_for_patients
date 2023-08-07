@@ -3,6 +3,8 @@ import openai
 from time import sleep
 import os
 import pyperclip
+from prompts import dc_instructions_prompt
+
 
 if "openai_api_key" not in st.session_state:
     st.session_state.openai_api_key = ''
@@ -104,33 +106,66 @@ if check_password():
     
 Multifocal, randomly distributed, nonrounded ground-glass opacities; nonspecific and likely infectious or inflammatory.
 Imaging features are nonspecific and can occur with a variety of infectious and noninfectious processes, including COVID-19 infection."""
-    with col1:
-        st.info(f'Here is an example from a publicly posted report:  \n\n {report}')
-        submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
+
+    task = st.radio("What do you want to do?", ("Generate discharge instructions", "Annotate a patient result"))
+
+    if task == "Generate discharge instructions":
         
-    
-    user_prompt = f'Generate a reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}'
-    with col1:
+        surg_procedure = st.text_input("If this is a surgical procedure, enter the procedure performed and any special concerns here.")
+        dc_instructions_context = f'Generate discharge instructions for a patient as if it is authored by a physician for her patient with {health_literacy_level} with this {surg_procedure}'
         if st.button("Generate Patient Summary"):
             try:
                 response= openai.ChatCompletion.create(
                 model= model,
                 messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
+                    {"role": "system", "content": dc_instructions_prompt},
+                    {"role": "user", "content": dc_instructions_context}
                 ],
                 temperature = 0, 
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0
                 )
-                with col2:
-                    our_summary = response.choices[0].message.content
-                    st.write(response.choices[0].message.content)
-                    pyperclip.copy(our_summary)
-                    st.success("Summary copied to clipboard.")
+                
+                our_summary = response.choices[0].message.content
+                st.write(response.choices[0].message.content)
+                pyperclip.copy(our_summary)
+                st.success("Summary copied to clipboard.")
             except:
 
                 st.write("API busy. Try again - better error handling coming. :) ")
                 st.stop()
-    
+
+    if task == "Annotate a patient result":
+
+        with col1:
+            st.info(f'Here is an example from a publicly posted report:  \n\n {report}')
+            submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
+            surg_procedure = st.text_input("If this is a surgical procedure, enter the procedure name here.")
+        
+        user_prompt = f'Generate a reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}'
+
+        with col1:
+            if st.button("Generate Patient Summary"):
+                try:
+                    response= openai.ChatCompletion.create(
+                    model= model,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    temperature = 0, 
+                    top_p=1,
+                    frequency_penalty=0,
+                    presence_penalty=0
+                    )
+                    with col2:
+                        our_summary = response.choices[0].message.content
+                        st.write(response.choices[0].message.content)
+                        pyperclip.copy(our_summary)
+                        st.success("Summary copied to clipboard.")
+                except:
+
+                    st.write("API busy. Try again - better error handling coming. :) ")
+                    st.stop()
+        
