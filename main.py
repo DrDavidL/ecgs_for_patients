@@ -146,7 +146,7 @@ Imaging features are nonspecific and can occur with a variety of infectious and 
             submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
            
         
-        user_prompt = f'Generate a reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}'
+        user_prompt = f'Generate a brief reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}. When appropriate emphasize that the findings are not urgent and you are happy to answer any questions at the next visit. '
 
         with col1:
             if st.button("Generate Patient Summary"):
