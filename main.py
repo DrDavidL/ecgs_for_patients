@@ -88,6 +88,7 @@ if check_password():
     abnormal findings in reports for your medically complex patients. You always provide accurate information and strive to reassure patients when immediate next steps are not needed.
     You are always brief and do not restate the findings from the report. You know that many tests often contain false positive findings and that many findings are not clinically significant. 
     You do not want to cause any unnecessary anxiety and avoid all jargon in keeping with the health literacy level requested. You offer to discuss any questions with the patient at the next visit.
+    Do not restate findings from the report. Do not use the word "concerning" or words that might invoke anxiety.
     
     Format your response as if you are speaking to a patient:
     
