@@ -10,6 +10,10 @@ This letter contains detailed instructions for your care after your knee replace
 
 **Medications:** You have been prescribed medications for pain management and to decrease inflammation. It's important to take them as directed by the physician. Never exceed the recommended dose.
 
+    Morning pills: [Medication Name] [Dosage] [Frequency]
+    Afternoon pills: [Medication Name] [Dosage] [Frequency]
+    Evening pills: [Medication Name] [Dosage] [Frequency]
+
 **Physical Therapy:** You will need to start physical therapy as early as a day or two post surgery. It is essential to do this regularly and as advised by your physiotherapist for the best recovery.
 
 **Activity Levels:** You are encouraged to move around but, it is equally important to rest as well. Refrain from heavy lifting or strenuous physical activities.

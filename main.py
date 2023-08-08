@@ -113,7 +113,8 @@ Imaging features are nonspecific and can occur with a variety of infectious and 
     if task == "Generate discharge instructions":
         
         surg_procedure = st.text_area("Please enter the procedure performed and any special concerns.")
-        dc_instructions_context = f'Generate discharge instructions for a patient as if it is authored by a physician for her patient with {health_literacy_level} with this {surg_procedure}'
+        dc_meds = st.text_area("Please enter the discharge medications.")
+        dc_instructions_context = f'Generate discharge instructions for a patient as if it is authored by a physician for her patient with {health_literacy_level} with this {surg_procedure} on {dc_meds}'
         if st.button("Generate Patient Information"):
             try:
                 response= openai.ChatCompletion.create(
