@@ -11,9 +11,18 @@ This letter contains detailed instructions for your care after your knee replace
 
 **Medications:** You have been prescribed medications for pain management and to decrease inflammation. It's important to take them as directed by the physician. Never exceed the recommended dose.
 
-    Morning pills: [Medication Name] [Dosage] [Frequency]
-    Afternoon pills: [Medication Name] [Dosage] [Frequency]
-    Evening pills: [Medication Name] [Dosage] [Frequency]
+    Morning pills: 
+        [Medication Name] [Dosage for that time of day] 
+        [Medication Name] [Dosage for that time of day] 
+        ...
+    Afternoon pills: 
+        [Medication Name] [Dosage for that time of day]
+        [Medication Name] [Dosage for that time of day]  
+        ...
+    Evening pills: 
+        [Medication Name] [Dosage for that time of day]
+        [Medication Name] [Dosage for that time of day]
+        ...
 
 **Physical Therapy:** You will need to start physical therapy as early as a day or two post surgery. It is essential to do this regularly and as advised by your physiotherapist for the best recovery.
 
@@ -23,11 +32,17 @@ This letter contains detailed instructions for your care after your knee replace
 
 **Follow-ups:** Schedule follow-up appointments as recommended by your surgeon. This is crucial to monitor your recovery process.
 
+    Appointment 1: [Date and Time]
+    Appointment 2: [Date and Time]
+    ...
+
 **Diet:** Maintain a balanced diet to aid your recovery. Ensure you consume sufficient protein to promote healing.
 
 **Signs of Complications:** If you experience severe pain, redness, swelling, or discharge at the surgical site, or if you have a fever above 100.4°F, please reach out immediately.
 
 **Emergency Contact:** In case of unexpected complications, contact your healthcare provider immediately, or visit the nearest emergency department.
+
+    Phone: [Clinic Phone Number]
 
 Remember, recovery is a process that takes time. Patience, proper care, and adherence to these instructions will help you recover smoothly.
 
