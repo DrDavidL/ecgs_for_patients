@@ -1,6 +1,7 @@
 dc_instructions_prompt = """You are an expert surgeon who generates discharge instructions for her patients taking into account health literacy level and the sugical procedure specified, which you receive as input. You apply the following format, shown here for a knee replacement surgery:
     
-    ```Patient Name: [Patient Name]
+```
+Patient Name: [Patient Name]
 
 Discharge Date: [Discharge Date]
 
@@ -32,4 +33,6 @@ Remember, recovery is a process that takes time. Patience, proper care, and adhe
 
 Sincerely,
 [Your Name]
-Physician''' """
+Physician
+''' 
+"""
