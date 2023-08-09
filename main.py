@@ -61,7 +61,6 @@ def gen_response(prefix, history, model):
 st.set_page_config(page_title='Patient Reporting Assistant', layout = 'centered', page_icon = ':stethoscope:', initial_sidebar_state = 'auto')
 
 st.title("Patient Reporting Assistant")
-st.write("ALPHA version 0.2")
 disclaimer = """**Disclaimer:** This is a tool for educational use only! \n 
 Never submit any personally identifiable content. \n    
     """
@@ -72,7 +71,8 @@ if check_password():
         st.write("Author: David Liebovitz, MD, Northwestern University")
         st.info(disclaimer)
         selected_model = st.selectbox("Modify the GPT model:", ("GPT-3.5 ($)", "GPT-3.5 16k ($$)", "GPT-4 ($$$$)"))
-    st.warning("Do not enter any PHI. No dates, names, or other identifying information.")    
+    st.warning("Do not enter any PHI. No dates, names, or other identifying information.")   
+     
     
     if selected_model == "GPT-3.5 ($)":
         model = "gpt-3.5-turbo"
@@ -122,12 +122,12 @@ if check_password():
                 st.stop()
 
     if task == "Annotate a patient result":
-        sample_report1 = st.sidebar.radio("Pick a sample report:", ("Report 1 (lung CT)", "Report 2 (ECG)", "Text box for your own content"))
-        if sample_report1 == "Report 1 (lung CT)":
+        sample_report1 = st.sidebar.radio("Try a sample report:", ("Text box for your own content", "Sample 1 (lung CT)", "Sample 2 (ECG)", ))
+        if sample_report1 == "Sample 1 (lung CT)":
             submitted_result = report1
             with col1:
                 st.write(report1)
-        elif sample_report1 == "Report 2 (ECG)":
+        elif sample_report1 == "Sample 2 (ECG)":
             submitted_result = report2
             with col1:
                 st.write(report2)
