@@ -3,7 +3,7 @@ import openai
 from time import sleep
 import os
 import pyperclip
-from prompts import dc_instructions_prompt
+from prompts import dc_instructions_prompt, report1, report2, system_prompt
 
 
 if "openai_api_key" not in st.session_state:
@@ -68,12 +68,12 @@ Never submit any personally identifiable content. \n
 openai.api_key = st.secrets["OPENAI_API_KEY"]   
 if check_password():    
 
-    with st.expander('About Patient Reporting Assistant - Important Disclaimer'):
+    with st.expander('About Patient Reporting Assistant - Important Information'):
         st.write("Author: David Liebovitz, MD, Northwestern University")
         st.info(disclaimer)
-        st.write("Last updated 7/27/23")
+        selected_model = st.selectbox("Modify the GPT model:", ("GPT-3.5 ($)", "GPT-3.5 16k ($$)", "GPT-4 ($$$$)"))
     st.warning("Do not enter any PHI. No dates, names, or other identifying information.")    
-    selected_model = st.selectbox("Pick your GPT model:", ("GPT-3.5 ($)", "GPT-3.5 16k ($$)", "GPT-4 ($$$$)"))
+    
     if selected_model == "GPT-3.5 ($)":
         model = "gpt-3.5-turbo"
     elif selected_model == "GPT-4 ($$$$)":
@@ -84,29 +84,12 @@ if check_password():
     with col2:
         health_literacy_level = st.radio("Output optimized for:", ("Low Health Literacy", "High Health Literacy"))
     
-    system_prompt = """You are an expert physician annotating results for patients to read. There are often many 
-    abnormal findings in reports for your medically complex patients. You always provide accurate information and strive to reassure patients when immediate next steps are not needed.
-    You are always brief and do not restate the findings from the report. You know that many tests often contain false positive findings and that many findings are not clinically significant. 
-    You do not want to cause any unnecessary anxiety and avoid all jargon in keeping with the health literacy level requested. You offer to discuss any questions with the patient at the next visit.
-    Do not restate findings from the report. Do not use the word "concerning" or words that might invoke anxiety.
-    
-    Format your response as if you are speaking to a patient:
-    
-    ``` Dear ***,
-    
-    I have reviewed your test results.
-    ...
-    
-    Kind regards,
-    
-    ***  
-    
-    """
 
-    report = """Impression:
-    
-Multifocal, randomly distributed, nonrounded ground-glass opacities; nonspecific and likely infectious or inflammatory.
-Imaging features are nonspecific and can occur with a variety of infectious and noninfectious processes, including COVID-19 infection."""
+
+
+
+
+
     with col1:
         task = st.radio("What do you want to do?", ("Generate discharge instructions", "Annotate a patient result"))
 
@@ -139,12 +122,18 @@ Imaging features are nonspecific and can occur with a variety of infectious and 
                 st.stop()
 
     if task == "Annotate a patient result":
-        with st.sidebar:
-            st.write(f'Here is an example from a publicly posted report you can copy and paste to try:  \n\n {report}') 
-
-        with col1:
-            
-            submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
+        sample_report1 = st.sidebar.radio("Pick a sample report:", ("Report 1 (lung CT)", "Report 2 (ECG)", "Text box for your own content"))
+        if sample_report1 == "Report 1 (lung CT)":
+            submitted_result = report1
+            with col1:
+                st.write(report1)
+        elif sample_report1 == "Report 2 (ECG)":
+            submitted_result = report2
+            with col1:
+                st.write(report2)
+        elif sample_report1 == "Text box for your own content":           
+            with col1:                
+                submitted_result = st.text_area("Paste your result content here without PHI.", height=600)
            
         
         user_prompt = f'Generate a brief reassuring summary as if it is authored by a physician for her patient with {health_literacy_level} with this {submitted_result}. When appropriate emphasize that the findings are not urgent and you are happy to answer any questions at the next visit. '
