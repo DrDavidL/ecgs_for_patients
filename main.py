@@ -70,16 +70,16 @@ if check_password():
     with st.expander('About Patient Reporting Assistant - Important Information'):
         st.write("Author: David Liebovitz, MD, Northwestern University")
         st.info(disclaimer)
-        selected_model = st.selectbox("Modify the GPT model:", ("GPT-3.5 ($)", "GPT-3.5 16k ($$)", "GPT-4 ($$$$)"))
+        # selected_model = st.selectbox("Modify the GPT model:", ("GPT-3.5 ($)", "GPT-3.5 16k ($$)", "GPT-4 ($$$$)"))
     st.warning("Do not enter any PHI. No dates, names, or other identifying information.")   
      
     
-    if selected_model == "GPT-3.5 ($)":
-        model = "gpt-3.5-turbo"
-    elif selected_model == "GPT-4 ($$$$)":
-        model = "gpt-4"
-    elif selected_model == "GPT-3.5 16k ($$)":
-        model = "gpt-3.5-turbo-16k"
+    # if selected_model == "GPT-3.5 ($)":
+    #     model = "gpt-3.5-turbo"
+    # elif selected_model == "GPT-4 ($$$$)":
+    #     model = "gpt-4"
+    # elif selected_model == "GPT-3.5 16k ($$)":
+    #     model = "gpt-3.5-turbo-16k"
     col1, col2 = st.columns(2)
     with col2:
         health_literacy_level = st.radio("Output optimized for:", ("Low Health Literacy", "High Health Literacy"))
@@ -101,7 +101,7 @@ if check_password():
         if st.button("Generate Patient Information"):
             try:
                 response= openai.ChatCompletion.create(
-                model= model,
+                model= "gpt-4o",
                 messages=[
                     {"role": "system", "content": dc_instructions_prompt},
                     {"role": "user", "content": dc_instructions_context}
@@ -142,7 +142,7 @@ if check_password():
             if st.button("Generate Patient Summary"):
                 try:
                     response= openai.ChatCompletion.create(
-                    model= model,
+                    model= "gpt-4o",
                     messages=[
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": user_prompt}
