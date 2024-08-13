@@ -114,8 +114,8 @@ if check_password():
                 
                 our_summary = response.choices[0].message.content
                 st.write(response.choices[0].message.content)
-                pyperclip.copy(our_summary)
-                st.success("Summary copied to clipboard.")
+                # pyperclip.copy(our_summary)
+                # st.success("Summary copied to clipboard.")
             except:
 
                 st.write("API busy. Try again - better error handling coming. :) ")
@@ -155,8 +155,8 @@ if check_password():
                     with col2:
                         our_summary = response.choices[0].message.content
                         st.write(response.choices[0].message.content)
-                        pyperclip.copy(our_summary)
-                        st.success("Summary copied to clipboard.")
+                        # pyperclip.copy(our_summary)
+                        # st.success("Summary copied to clipboard.")
                 except:
 
                     st.write("API busy. Try again - better error handling coming. :) ")
