@@ -119,8 +119,8 @@ if check_password():
                     # st.success("Summary copied to clipboard.")
                 except:
 
-                st.write("API busy. Try again - better error handling coming. :) ")
-                st.stop()
+                    st.write("API busy. Try again - better error handling coming. :) ")
+                    st.stop()
 
     if task == "Annotate a patient result":
         sample_report1 = st.sidebar.radio("Try a sample report:", ("Text box for your own content", "Sample 1 (lung CT)", "Sample 2 (ECG)", ))
