@@ -99,24 +99,25 @@ if check_password():
         dc_meds = st.text_area("Please enter the discharge medications.")
         dc_instructions_context = f'Generate discharge instructions for a patient as if it is authored by a physician for her patient with {health_literacy_level} with this {surg_procedure} on {dc_meds}'
         if st.button("Generate Patient Information"):
-            try:
-                response= openai.ChatCompletion.create(
-                model= "gpt-4o",
-                messages=[
-                    {"role": "system", "content": dc_instructions_prompt},
-                    {"role": "user", "content": dc_instructions_context}
-                ],
-                temperature = 0, 
-                top_p=1,
-                frequency_penalty=0,
-                presence_penalty=0
-                )
-                
-                our_summary = response.choices[0].message.content
-                st.write(response.choices[0].message.content)
-                # pyperclip.copy(our_summary)
-                # st.success("Summary copied to clipboard.")
-            except:
+            with st.spinner("Generating..."):
+                try:
+                    response= openai.ChatCompletion.create(
+                    model= "gpt-4o",
+                    messages=[
+                        {"role": "system", "content": dc_instructions_prompt},
+                        {"role": "user", "content": dc_instructions_context}
+                    ],
+                    temperature = 0, 
+                    top_p=1,
+                    frequency_penalty=0,
+                    presence_penalty=0
+                    )
+                    
+                    our_summary = response.choices[0].message.content
+                    st.write(response.choices[0].message.content)
+                    # pyperclip.copy(our_summary)
+                    # st.success("Summary copied to clipboard.")
+                except:
 
                 st.write("API busy. Try again - better error handling coming. :) ")
                 st.stop()
@@ -140,25 +141,26 @@ if check_password():
 
         with col1:
             if st.button("Generate Patient Summary"):
-                try:
-                    response= openai.ChatCompletion.create(
-                    model= "gpt-4o",
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt}
-                    ],
-                    temperature = 0, 
-                    top_p=1,
-                    frequency_penalty=0,
-                    presence_penalty=0
-                    )
-                    with col2:
-                        our_summary = response.choices[0].message.content
-                        st.write(response.choices[0].message.content)
-                        # pyperclip.copy(our_summary)
-                        # st.success("Summary copied to clipboard.")
-                except:
+                with st.spinner("Generating..."):
+                    try:
+                        response= openai.ChatCompletion.create(
+                        model= "gpt-4o",
+                        messages=[
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt}
+                        ],
+                        temperature = 0, 
+                        top_p=1,
+                        frequency_penalty=0,
+                        presence_penalty=0
+                        )
+                        with col2:
+                            our_summary = response.choices[0].message.content
+                            st.write(response.choices[0].message.content)
+                            # pyperclip.copy(our_summary)
+                            # st.success("Summary copied to clipboard.")
+                    except:
 
-                    st.write("API busy. Try again - better error handling coming. :) ")
-                    st.stop()
+                        st.write("API busy. Try again - better error handling coming. :) ")
+                        st.stop()
         
